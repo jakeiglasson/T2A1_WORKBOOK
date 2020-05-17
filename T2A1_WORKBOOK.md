@@ -316,3 +316,35 @@ https://support.airtable.com/hc/en-us/articles/218734758-A-beginner-s-guide-to-m
 
 ---
 
+## Q10	- Describe the integrity aspects of the relational database model. Your description should include information about the types of data integrity and how they can be enforced in a relational database. 100-200
+
+Data integrity refers to the maintenance of data as well as the overall completeness, accuracy and consistency of that data stored in the database. Data integrity is maintained through the use of various error-checking methods and validation procedures. The goal of data integrity is to prevent unintentional as well as unwanted changes to data.  
+
+#### Types of data integrity:
+
+Entity Integrity:
+
+* All tables must have a primary key. The values within the column chosen to be the primary key must be unique and cannot be null / nil.
+
+* This can be enforced be requiring (inside the schema) the primary key to have an integer value that cannot be null / nil.
+
+Referential Integrity:
+
+* All foreign keys can be in only one of two states. Either referencing another table entry or not referencing anything (null / nill).
+
+* This can be enforced be requiring (inside the schema) the referenced key to have only an integer value or null / nil. At the time of entry, the reference key value should be checked in the table its referencing to ensure the entry exists, if the reference doesn't exist then the data is not saved.
+
+Domain Integrity:
+
+* All data entered into columns must fit with a domain of parameters outlined for the column to which the data is input.
+
+* This can be enforced in the schema by giving a column set parameters and when a value is entered outside of those parameters the entry is not saved.
+
+REFERENCES:
+
+https://www.techopedia.com/definition/811/data-integrity-databases
+https://en.wikipedia.org/wiki/Data_integrity
+
+---
+
+
