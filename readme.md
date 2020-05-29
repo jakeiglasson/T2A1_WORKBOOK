@@ -448,11 +448,11 @@ The efficiency of an app (i.e. site) and the algorithms used are of the utmost i
 
 ### QUICK SORT:
 
-Quick sort is a divide-and-conquer algorithm. Quick sort works by selecting a random point (the pivot) from its input array and partitioning the elements either side of that pivot into two separate arrays.
+Quicksort is a divide-and-conquer algorithm. Quicksort works by selecting a random point (the pivot) from its input array and partitioning the elements either side of that pivot into two separate arrays.
 
 The separate arrays are as follows: one for the elements that are greater than the point selected and one for the elements that are less than the point selected.
 
-These new arrays are then sorted recursively (The Quick sort method is applied to these arrays as well) until no more elements can be sorted and then joined together.
+These new arrays are then sorted recursively (The Quicksort method is applied to these arrays as well) until no more elements can be sorted and then joined together.
 
 Once this process is complete we are left with the final sorted array.
 
@@ -474,11 +474,11 @@ The following is a diagram from Wikipedia showing the merge sort process:
 
 | | QUICKSORT VS MERGESORT |
 |-------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| SPEED | Quick sort has a speed/run-time of O(log n) in a best-case/average scenario and O(n2) in worst-case scenarios dependent on its implementation |
+| SPEED | Quicksort has a speed/run-time of O(log n) in a best-case/average scenario and O(n2) in worst-case scenarios dependent on its implementation |
 | | Merge sort has a guaranteed speed/run-time of O(nlogn) no matter the randomness of the starting list |
-| | On average merge sort is faster than quick sort on an average and worst-case scenario |
+| | On average merge sort is faster than quicksort on an average and worst-case scenario |
 | ELEMENT COMPARISONS | Merge sort performs fewer comparisons compared to quick sort contributing to its on average faster speed than quick sort |
-| MEMORY USAGE | Quick sort uses less memory than merge sort, therefore if you don't have a lot of memory (RAM) available to dedicate to a sorting algorithm than quick sort is a better choice over Merge sort |
+| MEMORY USAGE | Quicksort uses less memory than merge sort, therefore if you don't have a lot of memory (RAM) available to dedicate to a sorting algorithm than quicksort is a better choice over Merge sort |
 | REAL WOLRD APPLICATIONS | Quick sort should be used over merge sort in most real-world scenarios due to Quick sorts lower memory consumption which is a contributing factor to performance |
 | | Merge sort should only be used in real-world scenarios where time is critical and large amounts of memory are available |
 
@@ -506,7 +506,7 @@ Binary search has a time complexity of O(log n) where n is the number of element
 arr = [11,27,3,49,62,77,8,99]
 arr = arr.sort
 
-# find index of 8
+# find the index of 8
 
 def binary_search(arr, l, r, n)
 
@@ -551,7 +551,7 @@ arr = [11,27,3,49,62,77,8,99]
 arr = arr.sort
 p arr
 
-# find index of 8
+# find the index of 8
 
 def linear_search(arr, l, r, n)
 
@@ -649,15 +649,15 @@ An AWS service Fiverr makes use of is Kinesis. This is a computing server servic
 
 ## c. Describe the interaction of technologies within the app
 
-**Browser:** 
+**Browser:**
 
 The browser is client-side, it sends HTTP requests on behalf of the user to the Fiverr web-server (rails app) and receives information back (in the form of HTTP responses) from that web-server to display to the user.
 
-**Web-server:** 
+**Web-server:**
 
-Receives requests from the browser, sends those requests to the appropriate routes. Receives information from the view, sends that information to the browser.
+Receives requests from the browser and sends those requests to the appropriate routes. Receives information from the view, sends that information to the browser.
 
-**Rails Controller:** 
+**Rails Controller:**
 
 The Controller receives calls to its methods from the routes, can receive parameters from user queries, sends queries to the model to interact with the database, receives database information back from the model then sends that to the appropriate view.
 
