@@ -633,7 +633,7 @@ Python is a programming language used to build applications. Python provides rap
 * MySQL:
 MySQL is a relation database management system, it allows users to perform actions on a database such as SELECT, UPDATE, DELETE, INSERT INTO, CREATE DATABASE, ALTER DATABASE and CREATE TABLE.
 
-## b. Describe the hardware used to host the app 50-100
+## b. Describe the hardware used to host the app
 
 Fiverr makes use of the following hardware to host, manage and run their website:
 
@@ -641,27 +641,219 @@ Web servers (hosting web pages), database servers (stores large amounts of infor
 
 Some of these services are handled by Amazon Web Services (AWS). AWS allows you to host your website services in the cloud which has physical server hardware managed by Amazon.
 
-An AWS service Fiverr makes use of is Kinesis. This a computing server service which allows videos and data streams to be collected, processed, and analyzed.
+An AWS service Fiverr makes use of is Kinesis. This is a computing server service which allows videos and data streams to be collected, processed, and analyzed.
 
-## c. Describe the interaction of technologies within the app	50-100
+## c. Describe the interaction of technologies within the app
+
+Browser: The browser is client-side, it sends http requests on behalf of the user to the Fiverr web-server (rails app) and receives information back (in the form of http responses) from that web-server to display to the user. 
+
+Web-server: Receives requests from the browser, sends those request to the appropriate routes. Receives information from the view, sends that information to the browser.
+
+Rails Controller: The Controller receives calls to its methods from the routes, can receive parameters from user queries, sends queries to the model to interact with the database, receives database information back from the model then sends that to the appropriate view.
+
+## d. Describe the way data is structured within the app
+
+Fiverr structures its data as followed:
+
+Relational Database: Data is stored in a relational database, this data is structured into different tables each pertaining to different categories of information (such as a table for users and one for services).
+
+Tables: Each table within the database contains rows, these rows contain information on specific entries relating to the table. For the users table it may contain information on a users name, email and encrypted password.
+
+Document Database: A document database is used to store individual documents within collections. These collections would each contain information on certain aspects pertaining to elements on the site such as product attributes for product listings.
+
+## e. Identify entities which must be tracked by the app
+
+USER
+
+	Name
+	Email
+	Password
+	Seller status
+	Buyer status
+	Admin status
+
+PROFILE
+
+	Parent user
+	Image
+
+SERVICE CATEGORY
+
+	Category name
+
+SUB-SERVICE CATEGORY
+
+	Parent category
+	Category name
+
+LISTING
+
+	Service category
+	Sub service category
+	Parent user
+	Body text
+	Price
+	Sold status
+
+ORDER 
+
+	Parent listing
+	Parent buyer
+	Parent seller
+	Sold status
+
+PAYMENT INFORMATION
+
+	Parent user
+	Encrypted credit card number
+	Encrypted credit card expiry
+
+USER FEEDBACK
+
+	Parent user
+	Body text
+	Rating
+
+## f. Identify the relationships and associations between the entities you have identified in part (e)
+
+* A User has many listings
+* A Listing belongs to one User
+* A User has many ActiveOrders
+* An ActiveOrder belongs to many users 
+* A User has many CompleteOrders
+* A CompleteOrder belongs to many users
+* An Order belongs to a listing, a listing has many orders
+* ServiceCategories has many SubServiceCategories
+* SubServiceCategories belong to one ServiceCategory
+* A ServiceCategory and SubServiceCategory has many listings
+* A Listing belongs to a ServieCategory and a SubServiceCategory
+* A User has many PaymentInformation entities
+* An entity of PaymentInformation belongs to one User
+* A User has many UserFeedbacks
+* A UserFeedback belongs to one User
 
 
+## g. Design a schema using an Entity Relationship Diagram (ERD) appropriate for the database of this website (assuming a relational database model)
 
-## d. Describe the way data is structured within the app 50-100
+![alt text](./docs/fiverr_erd.png)
 
+DBML:
 
+```
+Table user {
+  id int [pk, increment] // auto-increment
+  full_name varchar
+  email text
+  encrypted_password text
+  seller boolean
+  buyer boolean
+  admin boolean
+  created_at timestamp
+  updated_at timestamp
+}
 
-## e. Identify entities which must be tracked by the app 50-100
+Table profile {
+  id int [pk, increment] // auto-increment
+  user_id int
+  image text
+  created_at timestamp
+  updated_at timestamp
+}
 
+Table service_category {
+  id int [pk, increment] // auto-increment
+  category text
+  created_at timestamp
+  updated_at timestamp
+}
 
+Table sub_service_category {
+  id int [pk, increment] // auto-increment
+  parent_category int 
+  category text
+  created_at timestamp
+  updated_at timestamp
+}
 
-## f. Identify the relationships and associations between the entities you have identified in part (e)	50-100
+Table Listing {
+  id int [pk, increment] // auto-increment
+  service_category_id int
+  sub_service_category_id int
+  user_id int
+  body text
+  price int
+  sold_status boolean
+  created_at timestamp
+  updated_at timestamp
+}
 
+Table Order {
+  id int [pk, increment] // auto-increment
+  listing_id int
+  buyer_id int
+  seller_id int
+  status order_status
+  created_at timestamp
+  updated_at timestamp
+}
 
+enum order_status {
+    InProgress
+    Complete
+    Cancelled
+}
 
-## g. Design a schema using an Entity Relationship Diagram (ERD) appropriate for the database of this website (assuming a relational database model) 50-100
+Table Payment_information {
+  id int [pk, increment] // auto-increment
+  user_id int
+  encrypted_credit_card_number int
+  encrypted_credit_card_expiry int
+  created_at timestamp
+  updated_at timestamp
+}
 
+Table User_feedback {
+  id int [pk, increment] // auto-increment
+  user_id int
+  body text
+  rating int
+  created_at timestamp
+  updated_at timestamp
+}
 
+//  * A user has one profile 
+//  * A profile belongs to one User
+Ref: "profile"."id" - "user"."id"
+
+// * A User has many listings
+// * A Listing belongs to one User
+Ref: "Listing"."user_id" > "user"."id"
+
+// * A User has many Orders
+// * An Order belongs to many users 
+Ref: "Order"."buyer_id" > "user"."id"
+Ref: "Order"."seller_id" > "user"."id"
+
+// * ServiceCategories has many SubServiceCategories
+// * SubServiceCategories belongs to one ServiceCategory
+Ref: "service_category"."id" < "sub_service_category"."id"
+
+// * A ServiceCategory and SubServiceCategory has many listings
+// * A Listing belongs to one ServieCategory and one SubServiceCategory
+Ref: "Listing"."service_category_id" > "service_category"."id"
+Ref: "Listing"."sub_service_category_id" > "sub_service_category"."id"
+
+// * An Order belongs to one listing, a listing has many orders
+Ref: "Order"."listing_id" > "Listing"."id"
+
+// * A User has many PaymentInformation entities
+// * An entity of PaymentInformation belongs to one User
+Ref: "Payment_information"."user_id" > "user"."id"
+
+// * A User has many UserFeedbacks
+// * A UserFeedback belongs to one User
+Ref: "User_feedback"."user_id" > "user"."id"
+```
 
 REFERENCES:
 
@@ -670,3 +862,4 @@ https://en.wikipedia.org/wiki/Python_(programming_language)
 https://www.python.org/doc/essays/blurb/
 https://en.wikipedia.org/wiki/JavaScript
 https://en.wikipedia.org/wiki/Amazon_Web_Services
+https://aws.amazon.com/nosql/document/
