@@ -714,7 +714,7 @@ USER FEEDBACK
 	Body text
 	Rating
 
-## f. Identify the relationships and associations between the entities you have identified in part (e)	50-100
+## f. Identify the relationships and associations between the entities you have identified in part (e)
 
 * A User has many listings
 * A Listing belongs to one User
@@ -733,7 +733,7 @@ USER FEEDBACK
 * A UserFeedback belongs to one User
 
 
-## g. Design a schema using an Entity Relationship Diagram (ERD) appropriate for the database of this website (assuming a relational database model) 50-100
+## g. Design a schema using an Entity Relationship Diagram (ERD) appropriate for the database of this website (assuming a relational database model)
 
 ![alt text](./docs/fiverr_erd.png)
 
