@@ -411,7 +411,7 @@ Example:
 DELETE FROM student WHERE id = 50;
 ```
 
-INSERT INTO:
+### INSERT INTO:
 
 The INSERT INTO statement is used to add new data entries (rows) into a given table, this is how new data is added to a database.
 
@@ -500,7 +500,7 @@ The algorithm starts with the element in the middle of the list and determines i
 
 Binary search has a time complexity of O(log n) where n is the number of elements in the array.
 
-RUBY IMPLEMENTATION OF BINARY SEARCH:
+**RUBY IMPLEMENTATION OF BINARY SEARCH:**
 
 ```
 arr = [11,27,3,49,62,77,8,99]
@@ -544,7 +544,7 @@ If the algorithm reaches the end of the list without finding its target value th
 
 Linear search has a time complexity of O(n).
 
-RUBY IMPLEMENTATION OF LINEAR SEARCH:
+**RUBY IMPLEMENTATION OF LINEAR SEARCH:**
 
 ```
 arr = [11,27,3,49,62,77,8,99]
@@ -621,16 +621,20 @@ The following research was conducted on the marketplace website Fiverr.
 
 ## a. List and describe the software used by the app
 
-* Ruby on rails:
+**Ruby on rails:**
+
 Ruby on Rails is a server-side web application framework based on the Ruby programming language. It provides default structures for a database, web service, and web pages.
 
-* JavaScript:
+**JavaScript:**
+
 JavaScript is a programming language used to enable interactivity within web pages for users, it is mainly used on websites for client-side page behavior.
 
-* Python:
+**Python:**
+
 Python is a programming language used to build applications. Python provides rapid application development and can be used as a scripting/glue language to connect existing components.
 
-* MySQL:
+**MySQL:**
+
 MySQL is a relational database management system, it allows users to perform actions on a database such as SELECT, UPDATE, DELETE, INSERT INTO, CREATE DATABASE, ALTER DATABASE, and CREATE TABLE.
 
 ## b. Describe the hardware used to host the app
@@ -645,74 +649,102 @@ An AWS service Fiverr makes use of is Kinesis. This is a computing server servic
 
 ## c. Describe the interaction of technologies within the app
 
-Browser: The browser is client-side, it sends HTTP requests on behalf of the user to the Fiverr web-server (rails app) and receives information back (in the form of HTTP responses) from that web-server to display to the user.
+**Browser:** 
 
-Web-server: Receives requests from the browser, sends those requests to the appropriate routes. Receives information from the view, sends that information to the browser.
+The browser is client-side, it sends HTTP requests on behalf of the user to the Fiverr web-server (rails app) and receives information back (in the form of HTTP responses) from that web-server to display to the user.
 
-Rails Controller: The Controller receives calls to its methods from the routes, can receive parameters from user queries, sends queries to the model to interact with the database, receives database information back from the model then sends that to the appropriate view.
+**Web-server:** 
+
+Receives requests from the browser, sends those requests to the appropriate routes. Receives information from the view, sends that information to the browser.
+
+**Rails Controller:** 
+
+The Controller receives calls to its methods from the routes, can receive parameters from user queries, sends queries to the model to interact with the database, receives database information back from the model then sends that to the appropriate view.
 
 ## d. Describe the way data is structured within the app
 
 Fiverr structures its data as follows:
 
-Relational Database: Data is stored in a relational database, this data is structured into different tables each pertaining to different categories of information (such as a table for users and one for services).
+**Relational Database:**
 
-Tables: Each table within the database contains rows, these rows contain information on specific entries relating to the table. For the users' table, it may contain information on a user's name, email, and encrypted password.
+Data is stored in a relational database, this data is structured into different tables each pertaining to different categories of information (such as a table for users and one for services).
 
-Document Database: A document database is used to store individual documents within collections. These collections would each contain information on certain aspects pertaining to elements on the site such as product attributes for product listings.
+**Tables:**
+
+Each table within the database contains rows, these rows contain information on specific entries relating to the table. For the users' table, it may contain information on a user's name, email, and encrypted password.
+
+**Document Database:**
+
+A document database is used to store individual documents within collections. These collections would each contain information on certain aspects pertaining to elements on the site such as product attributes for product listings.
 
 ## e. Identify entities which must be tracked by the app
 
 USER
 
+```
 Name
 Email
 Password
 Seller status
 Buyer status
 Admin status
+```
 
 PROFILE
 
+```
 Parent user
 Image
+```
 
 SERVICE CATEGORY
 
+```
 Category name
+```
 
 SUB-SERVICE CATEGORY
 
+```
 Parent category
 Category name
+```
 
 LISTING
 
+```
 Service category
 Sub service category
 Parent user
 Body text
 Price
 Sold status
+```
 
 ORDER
 
+```
 Parent listing
 Parent buyer
 Parent seller
 Sold status
+```
 
 PAYMENT INFORMATION
 
+```
 Parent user
 Encrypted credit card number
 Encrypted credit card expiry
+```
 
 USER FEEDBACK
 
+```
 Parent user
 Body text
 Rating
+```
 
 ## f. Identify the relationships and associations between the entities you have identified in part (e)
 
